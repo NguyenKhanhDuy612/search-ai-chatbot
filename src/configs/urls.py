@@ -1,4 +1,5 @@
 from src.services.demo.controllers import DemoControllerAPI
+from src.services.demo.controllers import PDFLoaderControllerAPI
 
 
 class API:
@@ -9,4 +10,5 @@ class API:
 
 all_apis = [
 	API(DemoControllerAPI, "/demo"),
+	API(PDFLoaderControllerAPI, "/demo1"),
 ]
