@@ -1,0 +1,33 @@
+[API_KEYS]
+OPENAI_API_KEY = "your-openai-api-key"
+GOOGLE_API_KEY = "your-google-api-key"
+
+[LANGSMITH]
+LANGSMITH_API_KEY = "your-langsmith-api-key"
+LANGSMITH_PROJECT = "research-ai-chatbot"
+LANGSMITH_TRACING_ENABLED = true
+
+[PROJECT]
+ENVIRONMENT = "development"
+DEBUG = true
+HOST = "localhost"
+PORT = 5000
+
+[VECTOR_STORE]
+CHROMA_PERSIST_DIRECTORY = "./chroma_db"
+COLLECTION_NAME = "research_documents"
+
+[MODEL_SETTINGS]
+TEMPERATURE = 0.7
+MAX_TOKENS = 2000
+MODEL_NAME = "gpt-3.5-turbo"
+GEMINI_MODEL = "gemini-pro"
+
+[DOCUMENT_PROCESSING]
+CHUNK_SIZE = 1000
+CHUNK_OVERLAP = 200
+
+[FLASK]
+FLASK_ENV = "development"
+FLASK_DEBUG = 1
+APP_PORT = 5000
