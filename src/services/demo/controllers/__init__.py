@@ -5,6 +5,7 @@ from flask_restful import Resource
 from src.services.demo.models.demo_schema import DemoSchema
 from src.services.demo.services import DemoService
 from langchain_community.document_loaders import PyMuPDFLoader
+import os
 
 @doc(tags=["Demo"])
 class DemoControllerAPI(MethodResource, Resource):
@@ -17,9 +18,9 @@ class DemoControllerAPI(MethodResource, Resource):
 
 		return Response(response, mimetype='text/plain')
 
-
+@doc(tags=["Demo Read PDF"])
 class PDFLoaderControllerAPI(MethodResource, Resource):
-	@doc(description="Load PDF and return content", tags=["PDF"])
+	@doc(description="Load PDF and return content")
 	@marshal_with(DemoSchema, code=200, description="Success")
 	def get(self):
 		try:
@@ -38,15 +39,17 @@ class PDFLoaderControllerAPI(MethodResource, Resource):
 				full_pdf_content += f"--- Page {doc.metadata.get('page', 'N/A')} ---\n"
 				full_pdf_content += doc.page_content + "\n\n"
 
+			 # Xóa file tạm sau khi xử lý
+			# os.remove(file_path)
+	
 			# Trả về response plain text
 			return Response(full_pdf_content, mimetype='text/plain')
 
 
 		except Exception as e:
-			return jsonify({
-				"error": str(e),
-				"message": "Failed to load PDF"
-			}), 500
+			return Response(f"Error loading PDF: {str(e)}", 
+							status=500, 
+							mimetype='text/plain')
 
 	# @doc(description="Load specific page of PDF", tags=["PDF"])
 	# def get_page(self, page_number: int):
